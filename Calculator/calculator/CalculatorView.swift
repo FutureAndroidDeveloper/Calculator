@@ -8,20 +8,31 @@
 
 import UIKit
 
-class CalculatorView: UIView {
+class CalculatorView: UIView, CalculatorDelegate {
+    func operationResult(_ result: Double) {
+        resultLabel.text = "\(result)"
+    }
     
-    private let displayView: UIView
-    private let keyboard: UIStackView
+    private let calcaulator: Calculator
+    private var buttonsProvider: ButtonsProvider
     private let buttons: [[CalculatorButton]]
+    
+    private let resultLabel = UILabel()
+    private let displayView = UIView()
+    private let keyboard = UIStackView()
     
     private let butonsInRow = 4
     
-    init(buttons: [[CalculatorButton]]) {
-        self.buttons = buttons
-        displayView = UIView()
-        keyboard = UIStackView()
+    init() {
+        calcaulator = Calculator()
+        buttonsProvider = ButtonsProvider(calculcator: calcaulator)
+        buttons = buttonsProvider.createButtonsModels().map { row in
+            row.map { CalculatorButton(model: $0) }
+        }
         super.init(frame: .zero)
+        calcaulator.delegate = self
         setup()
+        calcaulator.reset()
     }
     
     required init?(coder: NSCoder) {
@@ -46,14 +57,17 @@ class CalculatorView: UIView {
     
     private func setup() {
         keyboard.axis = .vertical
-        keyboard.distribution = .equalSpacing
+        keyboard.distribution = .fill
         keyboard.spacing = 8
+        keyboard.isLayoutMarginsRelativeArrangement = true
+        keyboard.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         
         buttons.forEach {
             let row = createRow(for: $0)
             keyboard.addArrangedSubview(row)
         }
         
+        // display
         displayView.backgroundColor = .lightGray
         displayView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(displayView)
@@ -63,6 +77,15 @@ class CalculatorView: UIView {
             displayView.topAnchor.constraint(equalTo: topAnchor)
         ])
         
+        displayView.addSubview(resultLabel)
+        resultLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            resultLabel.centerYAnchor.constraint(equalTo: displayView.centerYAnchor),
+            resultLabel.centerXAnchor.constraint(equalTo: displayView.centerXAnchor)
+        ])
+        
+        
+        // keyboard
         keyboard.backgroundColor = .darkGray
         keyboard.translatesAutoresizingMaskIntoConstraints = false
         addSubview(keyboard)
@@ -77,11 +100,13 @@ class CalculatorView: UIView {
     private func createRow(for buttons: [CalculatorButton]) -> UIStackView {
         let row = UIStackView(arrangedSubviews: buttons)
         row.axis = .horizontal
-        row.distribution = .fillEqually
         row.spacing = 8
         
-        row.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        row.isLayoutMarginsRelativeArrangement = true
+        if buttons.count < butonsInRow {
+             row.distribution = .fill
+        } else {
+            row.distribution = .fillEqually
+        }
         
         return row
     }

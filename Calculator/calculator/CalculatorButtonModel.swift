@@ -38,29 +38,58 @@ enum CalculatorButtonType {
 }
 
 enum CalculatorOperation: CustomStringConvertible {
-    case plus
-    case minus
+    case addition
+    case substraction
+    case multiplication
+    case division
+    case equals
     
     var description: String {
         switch self {
-        case .minus:
-            return "-"
-        case .plus:
-            return "+"
+        case .addition:
+            return "➕"
+        case .substraction:
+            return "➖"
+        case .multiplication:
+            return "✖️"
+        case .division:
+            return "➗"
+        case .equals:
+            return "="
+        }
+    }
+}
+
+enum ClearState: CustomStringConvertible {
+    case AC
+    case C
+    
+    var description: String {
+        switch self {
+        case .AC:
+            return "AC"
+        case .C:
+            return "C"
         }
     }
 }
 
 enum CalculatorModifier: CustomStringConvertible {
-    case znak
+    case sign
     case comma
+    case percent
+    case clear(state: ClearState)
     
     var description: String {
         switch self {
+        case .sign:
+            return "+/-"
         case .comma:
             return ","
-        case .znak:
-            return "+/-"
+        case .percent:
+            return "%"
+        case .clear(let state):
+            return state.description
         }
     }
 }
