@@ -30,6 +30,13 @@ class MathCalculator: Calculator {
     }
     
     func setCommand(_ command: MathCommand) {
+        // если уже есть комманда, то вычисляем прошлый результат
+        if let _ = self.command {
+            calculate()
+            self.command = command
+            textValue = String()
+            return
+        }
         self.command = command
         
         if let first = firstValue {
