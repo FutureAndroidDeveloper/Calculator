@@ -9,12 +9,57 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    private var calculator: CalculatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
+        let buttons = (0...4).map { _ in
+            createButtonsModels().map { CalculatorButton(model: $0) }
+        }
+        
+        calculator = CalculatorView(buttons: buttons)
+        setup()
     }
-
+    
+    private func setup() {
+        view.addSubview(calculator)
+        calculator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            calculator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            calculator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            calculator.topAnchor.constraint(equalTo: view.topAnchor),
+            calculator.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+    
+    private func createButtonsModels() -> [CalculatorButtonModel] {
+        var models = [CalculatorButtonModel]()
+        
+        let number1 = CalculatorButtonModel(button: .number(value: 1)) {
+            print("Tapped")
+        }
+        models.append(number1)
+        
+        let number2 = CalculatorButtonModel(button: .number(value: 2)) {
+            print("Tapped")
+        }
+        models.append(number2)
+        
+        let modifier = CalculatorButtonModel(button: .modifier(.znak)) {
+            print("Tapped")
+        }
+        models.append(modifier)
+        
+        let operation = CalculatorButtonModel(button: .operation(.minus)) {
+            print("Tapped")
+        }
+        models.append(operation)
+        
+        return models
+    }
 
 }
 
