@@ -1,19 +1,7 @@
-//
-//  CalculatorView.swift
-//  Calculator
-//
-//  Created by Klimenkov, Kirill on 25.03.2021.
-//  Copyright © 2021 Klimenkov, Kirill. All rights reserved.
-//
-
 import UIKit
 
 class CalculatorView: UIView, CalculatorDelegate {
-    func operationResult(_ result: Double) {
-        resultLabel.text = "\(result)"
-    }
-    
-    private let calcaulator: Calculator
+    private var calcaulator: Calculator
     private var buttonsProvider: ButtonsProvider
     private let buttons: [[CalculatorButton]]
     
@@ -24,7 +12,7 @@ class CalculatorView: UIView, CalculatorDelegate {
     private let butonsInRow = 4
     
     init() {
-        calcaulator = Calculator()
+        calcaulator = MathCalculator()
         buttonsProvider = ButtonsProvider(calculcator: calcaulator)
         buttons = buttonsProvider.createButtonsModels().map { row in
             row.map { CalculatorButton(model: $0) }
@@ -53,6 +41,10 @@ class CalculatorView: UIView, CalculatorDelegate {
             $0.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
             $0.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         }
+    }
+    
+    func operationResult(_ result: Double) {
+        resultLabel.text = "\(result)"
     }
     
     private func setup() {

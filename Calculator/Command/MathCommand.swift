@@ -1,11 +1,3 @@
-//
-//  MathCommand.swift
-//  Calculator
-//
-//  Created by Klimenkov, Kirill on 29.03.2021.
-//  Copyright © 2021 Klimenkov, Kirill. All rights reserved.
-//
-
 import Foundation
 
 protocol MathCommand {

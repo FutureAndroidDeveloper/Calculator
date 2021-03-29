@@ -1,19 +1,6 @@
-//
-//  Calculator.swift
-//  Calculator
-//
-//  Created by Klimenkov, Kirill on 29.03.2021.
-//  Copyright © 2021 Klimenkov, Kirill. All rights reserved.
-//
-
 import Foundation
 
-
-protocol CalculatorDelegate: class {
-    func operationResult(_ result: Double)
-}
-
-class Calculator {
+class MathCalculator: Calculator {
     private var firstValue: Double?
     private var secondValue: Double?
     private var command: MathCommand?
@@ -35,22 +22,11 @@ class Calculator {
         }
         let result = command.execute(leftValue: leftValue, rightValue: rightValue)
         delegate?.operationResult(result)
-        firstValue = result
+        update(with: result)
     }
     
     func setValue(_ value: Int) {
-        textValue.append("\(value)")
-        
-        guard let newValue = Double(textValue) else {
-            print("Cant convert text value to Double")
-            return
-        }
-        
-        if let _ = firstValue {
-            secondValue = newValue
-        }
-        
-        delegate?.operationResult(newValue)
+        updateValue("\(value)")
     }
     
     func setCommand(_ command: MathCommand) {
@@ -67,8 +43,34 @@ class Calculator {
     func reset() {
         firstValue = nil
         secondValue = nil
+        command = nil
         textValue = String()
         delegate?.operationResult(0)
+    }
+    
+    func applyModifier(_ modifier: MathModifier) {
+        guard let value = Double(textValue) else {
+            print("Cant convert text value to Double")
+            return
+        }
+        let newValue = modifier.modify(value: value)
+        textValue = String()
+        updateValue("\(newValue)")
+    }
+    
+    private func updateValue(_ value: String) {
+        textValue.append(value)
+        
+        guard let newValue = Double(textValue) else {
+            print("Cant convert text value to Double")
+            return
+        }
+        
+        if let _ = firstValue {
+            secondValue = newValue
+        }
+        
+        delegate?.operationResult(newValue)
     }
     
     private func update(with result: Double) {

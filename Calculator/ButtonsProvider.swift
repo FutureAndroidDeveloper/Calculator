@@ -32,12 +32,12 @@ class ButtonsProvider {
         models.append(clear)
         
         let sign = CalculatorButtonModel(button: .modifier(.sign)) {
-            //
+            self.calculcator.applyModifier(SignModifier())
         }
         models.append(sign)
         
         let percent = CalculatorButtonModel(button: .modifier(.percent)) {
-            //
+            self.calculcator.applyModifier(PercentModifier())
         }
         models.append(percent)
         
@@ -136,7 +136,7 @@ class ButtonsProvider {
         models.append(zero)
         
         let comma = CalculatorButtonModel(button: .modifier(.comma)) {
-            //
+            // TODO:
         }
         models.append(comma)
 
