@@ -12,6 +12,7 @@
 		F5B39691261218F800256514 /* ButtonsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B39690261218F800256514 /* ButtonsProvider.swift */; };
 		F5B396932612408C00256514 /* MathModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B396922612408C00256514 /* MathModifier.swift */; };
 		F5B396952612479500256514 /* MathCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B396942612479500256514 /* MathCalculator.swift */; };
+		F5C11D892613431500ADEFA8 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C11D882613431500ADEFA8 /* DisplayView.swift */; };
 		F5D5A785260CBE3F007D28B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D5A784260CBE3F007D28B3 /* AppDelegate.swift */; };
 		F5D5A787260CBE3F007D28B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D5A786260CBE3F007D28B3 /* SceneDelegate.swift */; };
 		F5D5A789260CBE3F007D28B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D5A788260CBE3F007D28B3 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 		F5B39690261218F800256514 /* ButtonsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsProvider.swift; sourceTree = "<group>"; };
 		F5B396922612408C00256514 /* MathModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathModifier.swift; sourceTree = "<group>"; };
 		F5B396942612479500256514 /* MathCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathCalculator.swift; sourceTree = "<group>"; };
+		F5C11D882613431500ADEFA8 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		F5D5A781260CBE3F007D28B3 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D5A784260CBE3F007D28B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D5A786260CBE3F007D28B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			children = (
 				F5D5A799260CBE84007D28B3 /* CalculatorView.swift */,
 				F5D5A79B260CBEB5007D28B3 /* CalculatorButton.swift */,
+				F5C11D882613431500ADEFA8 /* DisplayView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				F5B39691261218F800256514 /* ButtonsProvider.swift in Sources */,
 				F5D5A79E260CBEFB007D28B3 /* CalculatorButtonModel.swift in Sources */,
 				F50F55A52611EDDE00C0B357 /* Calculator.swift in Sources */,
+				F5C11D892613431500ADEFA8 /* DisplayView.swift in Sources */,
 				F5D5A787260CBE3F007D28B3 /* SceneDelegate.swift in Sources */,
 				F5D5A79C260CBEB5007D28B3 /* CalculatorButton.swift in Sources */,
 			);

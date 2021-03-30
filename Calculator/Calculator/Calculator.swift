@@ -12,4 +12,6 @@ protocol Calculator {
 
 protocol CalculatorDelegate: class {
     func operationResult(_ result: Double)
+    func currentValue(_ value: Double)
+    func expression(_ expression: String)
 }

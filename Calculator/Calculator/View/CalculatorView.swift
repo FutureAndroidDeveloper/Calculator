@@ -1,12 +1,16 @@
 import UIKit
 
 class CalculatorView: UIView, CalculatorDelegate {
+    
     private var calcaulator: Calculator
     private var buttonsProvider: ButtonsProvider
     private let buttons: [[CalculatorButton]]
     
-    private let resultLabel = UILabel()
+//    private let resultLabel = UILabel()
     private let displayView = UIView()
+    
+    private let display = DisplayView()
+    
     private let keyboard = UIStackView()
     
     private let butonsInRow = 4
@@ -44,7 +48,15 @@ class CalculatorView: UIView, CalculatorDelegate {
     }
     
     func operationResult(_ result: Double) {
-        resultLabel.text = "\(result)"
+        display.setResult("\(result)")
+    }
+    
+    func currentValue(_ value: Double) {
+        display.setCurrentValue("\(value)")
+    }
+    
+    func expression(_ expression: String) {
+        display.setExpression(expression)
     }
     
     private func setup() {
@@ -69,12 +81,22 @@ class CalculatorView: UIView, CalculatorDelegate {
             displayView.topAnchor.constraint(equalTo: topAnchor)
         ])
         
-        displayView.addSubview(resultLabel)
-        resultLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        display.translatesAutoresizingMaskIntoConstraints = false
+        displayView.addSubview(display)
         NSLayoutConstraint.activate([
-            resultLabel.centerYAnchor.constraint(equalTo: displayView.centerYAnchor),
-            resultLabel.centerXAnchor.constraint(equalTo: displayView.centerXAnchor)
+            display.centerYAnchor.constraint(equalTo: displayView.centerYAnchor),
+            display.centerXAnchor.constraint(equalTo: displayView.centerXAnchor),
+            display.heightAnchor.constraint(equalTo: displayView.heightAnchor),
+            display.widthAnchor.constraint(equalTo: displayView.widthAnchor)
         ])
+        
+//        displayView.addSubview(resultLabel)
+//        resultLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            resultLabel.centerYAnchor.constraint(equalTo: displayView.centerYAnchor),
+//            resultLabel.centerXAnchor.constraint(equalTo: displayView.centerXAnchor)
+//        ])
         
         
         // keyboard

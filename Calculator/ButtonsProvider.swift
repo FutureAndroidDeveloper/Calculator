@@ -42,7 +42,7 @@ class ButtonsProvider {
         models.append(percent)
         
         let division = CalculatorButtonModel(button: .operation(.division)) {
-            self.calculcator.setCommand(DivisionCommand())
+            self.calculcator.setCommand(DivisionCommand(buttonType: .operation(.division)))
         }
         models.append(division)
         
@@ -68,7 +68,7 @@ class ButtonsProvider {
         models.append(nine)
         
         let multiplication = CalculatorButtonModel(button: .operation(.multiplication)) {
-            self.calculcator.setCommand(MultiplicationCommand())
+            self.calculcator.setCommand(MultiplicationCommand(buttonType: .operation(.multiplication)))
         }
         models.append(multiplication)
         
@@ -94,7 +94,7 @@ class ButtonsProvider {
         models.append(six)
         
         let substraction = CalculatorButtonModel(button: .operation(.substraction)) {
-            self.calculcator.setCommand(SubtractionCommand())
+            self.calculcator.setCommand(SubtractionCommand(buttonType: .operation(.substraction)))
         }
         models.append(substraction)
         
@@ -120,7 +120,7 @@ class ButtonsProvider {
         models.append(three)
         
         let addition = CalculatorButtonModel(button: .operation(.addition)) {
-            self.calculcator.setCommand(AdditionCommand())
+            self.calculcator.setCommand(AdditionCommand(buttonType: .operation(.addition)))
         }
         models.append(addition)
         
