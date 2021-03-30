@@ -3,9 +3,11 @@ import Foundation
 
 class CalculatorButtonModel {
     let symbol: String
-    var handler: () -> Void
+    let buttonType: CalculatorButtonType
+    var handler: (CalculatorButtonType?) -> Void
     
-    init(button: CalculatorButtonType, handler: @escaping () -> Void) {
+    init(button: CalculatorButtonType, handler: @escaping (CalculatorButtonType?) -> Void) {
+        buttonType = button
         symbol = button.symbol()
         self.handler = handler
     }

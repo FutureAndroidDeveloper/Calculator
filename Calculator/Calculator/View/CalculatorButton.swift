@@ -43,6 +43,6 @@ class CalculatorButton: UIView {
     
     @objc
     private func handleButtonTap() {
-        model.handler()
+        model.handler(model.buttonType)
     }
 }

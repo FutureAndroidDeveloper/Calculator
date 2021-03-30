@@ -3,7 +3,7 @@ import Foundation
 protocol Calculator {
     var delegate: CalculatorDelegate? { get set }
     
-    func setValue(_ value: Int)
+    func setValue(_ value: Double)
     func setCommand(_ command: MathCommand)
     func applyModifier(_ modifier: MathModifier)
     func calculate()

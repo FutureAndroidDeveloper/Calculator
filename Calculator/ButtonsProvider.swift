@@ -26,22 +26,22 @@ class ButtonsProvider {
     private func firstRow() -> [CalculatorButtonModel] {
         var models = [CalculatorButtonModel]()
         
-        let clear = CalculatorButtonModel(button: .modifier(.clear(state: .AC))) {
+        let clear = CalculatorButtonModel(button: .modifier(.clear(state: .AC))) { buttonType in
             self.calculcator.reset()
         }
         models.append(clear)
         
-        let sign = CalculatorButtonModel(button: .modifier(.sign)) {
+        let sign = CalculatorButtonModel(button: .modifier(.sign)) { _ in
             self.calculcator.applyModifier(SignModifier())
         }
         models.append(sign)
         
-        let percent = CalculatorButtonModel(button: .modifier(.percent)) {
+        let percent = CalculatorButtonModel(button: .modifier(.percent)) { _ in
             self.calculcator.applyModifier(PercentModifier())
         }
         models.append(percent)
         
-        let division = CalculatorButtonModel(button: .operation(.division)) {
+        let division = CalculatorButtonModel(button: .operation(.division)) { _ in
             self.calculcator.setCommand(DivisionCommand(buttonType: .operation(.division)))
         }
         models.append(division)
@@ -52,22 +52,22 @@ class ButtonsProvider {
     private func secondRow() -> [CalculatorButtonModel] {
         var models = [CalculatorButtonModel]()
         
-        let seven = CalculatorButtonModel(button: .number(value: 7)) {
+        let seven = CalculatorButtonModel(button: .number(value: 7)) { _ in
             self.calculcator.setValue(7)
         }
         models.append(seven)
         
-        let eight = CalculatorButtonModel(button: .number(value: 8)) {
+        let eight = CalculatorButtonModel(button: .number(value: 8)) { _ in
             self.calculcator.setValue(8)
         }
         models.append(eight)
         
-        let nine = CalculatorButtonModel(button: .number(value: 9)) {
+        let nine = CalculatorButtonModel(button: .number(value: 9)) { _ in
             self.calculcator.setValue(9)
         }
         models.append(nine)
         
-        let multiplication = CalculatorButtonModel(button: .operation(.multiplication)) {
+        let multiplication = CalculatorButtonModel(button: .operation(.multiplication)) { _ in
             self.calculcator.setCommand(MultiplicationCommand(buttonType: .operation(.multiplication)))
         }
         models.append(multiplication)
@@ -78,22 +78,22 @@ class ButtonsProvider {
     private func thirdRow() -> [CalculatorButtonModel] {
         var models = [CalculatorButtonModel]()
         
-        let four = CalculatorButtonModel(button: .number(value: 4)) {
+        let four = CalculatorButtonModel(button: .number(value: 4)) { _ in
             self.calculcator.setValue(4)
         }
         models.append(four)
         
-        let five = CalculatorButtonModel(button: .number(value: 5)) {
+        let five = CalculatorButtonModel(button: .number(value: 5)) { _ in
             self.calculcator.setValue(5)
         }
         models.append(five)
         
-        let six = CalculatorButtonModel(button: .number(value: 6)) {
+        let six = CalculatorButtonModel(button: .number(value: 6)) { _ in
             self.calculcator.setValue(6)
         }
         models.append(six)
         
-        let substraction = CalculatorButtonModel(button: .operation(.substraction)) {
+        let substraction = CalculatorButtonModel(button: .operation(.substraction)) { _ in
             self.calculcator.setCommand(SubtractionCommand(buttonType: .operation(.substraction)))
         }
         models.append(substraction)
@@ -104,22 +104,22 @@ class ButtonsProvider {
     private func fourthRow() -> [CalculatorButtonModel] {
         var models = [CalculatorButtonModel]()
         
-        let one = CalculatorButtonModel(button: .number(value: 1)) {
+        let one = CalculatorButtonModel(button: .number(value: 1)) { _ in
             self.calculcator.setValue(1)
         }
         models.append(one)
         
-        let two = CalculatorButtonModel(button: .number(value: 2)) {
+        let two = CalculatorButtonModel(button: .number(value: 2)) { _ in
             self.calculcator.setValue(2)
         }
         models.append(two)
         
-        let three = CalculatorButtonModel(button: .number(value: 3)) {
+        let three = CalculatorButtonModel(button: .number(value: 3)) { _ in
             self.calculcator.setValue(3)
         }
         models.append(three)
         
-        let addition = CalculatorButtonModel(button: .operation(.addition)) {
+        let addition = CalculatorButtonModel(button: .operation(.addition)) { _ in
             self.calculcator.setCommand(AdditionCommand(buttonType: .operation(.addition)))
         }
         models.append(addition)
@@ -130,17 +130,17 @@ class ButtonsProvider {
     private func fifthRow() -> [CalculatorButtonModel] {
         var models = [CalculatorButtonModel]()
         
-        let zero = CalculatorButtonModel(button: .number(value: 0)) {
+        let zero = CalculatorButtonModel(button: .number(value: 0)) { _ in
             self.calculcator.setValue(0)
         }
         models.append(zero)
         
-        let comma = CalculatorButtonModel(button: .modifier(.comma)) {
+        let comma = CalculatorButtonModel(button: .modifier(.comma)) { _ in
             // TODO:
         }
         models.append(comma)
 
-        let equals = CalculatorButtonModel(button: .operation(.equals)) {
+        let equals = CalculatorButtonModel(button: .operation(.equals)) { _ in
             self.calculcator.calculate()
         }
         models.append(equals)

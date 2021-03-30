@@ -1,32 +1,33 @@
 import Foundation
 
 class MathCalculator: Calculator {
-    private var firstValue: Double?
-    private var secondValue: Double?
-    private var command: MathCommand?
-    
     private var textValue: String
-    
+    private var expression: String
     private var lastResult: Double?
+    
+    private var operationStack = [MathCommand]()
+    private var valueStack = [Double]()
     
     weak var delegate: CalculatorDelegate?
     
     
-    var operationStack = [MathCommand]()
-    var valueStack = [Double]()
-    
-    
     init() {
         textValue = String()
+        expression = String()
     }
     
     func calculate() {
-        guard let lastEnteredValue = Double(textValue) else {
-            print("Cant convert text value to Double")
+        if let lastEnteredValue = Double(textValue) {
+            // после результата продолжить ввод
+            valueStack.append(lastEnteredValue)
+        } else if let firstValue = valueStack.first {
+            // 20 + = .... 20 + 20 = 40
+            setValue(firstValue)
+            valueStack.append(firstValue)
+        } else {
             return
         }
-        valueStack.append(lastEnteredValue)
-        
+                
         print()
         print(#function)
         var calculationStack = valueStack
@@ -64,25 +65,22 @@ class MathCalculator: Calculator {
             expression = String()
             textValue = String()
         }
-        
-//        guard let command = command,
-//            let leftValue = firstValue,
-//            let rightValue = secondValue else {
-//                print("Cant perform calculate operation")
-//                return
-//        }
-//        let result = command.execute(leftValue: leftValue, rightValue: rightValue)
-//        delegate?.operationResult(result)
-//        update(with: result)
     }
     
-    func setValue(_ value: Int) {
+    func setValue(_ value: Double) {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = false
+
+        guard let number = formatter.string(from: value as NSNumber) else {
+            print("Formatter problem!")
+            return
+        }
+        
         lastResult = nil
-        updateValue("\(value)")
+        updateValue(number)
     }
     
     func setCommand(_ command: MathCommand) {
-        
         if let result = lastResult {
             expression.append("\(result)")
             textValue.append("\(result)")
@@ -100,34 +98,9 @@ class MathCalculator: Calculator {
         
         expression.append(" \(command.buttonType.symbol()) ")
         delegate?.expression(expression)
-        
-//        // если уже есть комманда, то вычисляем прошлый результат
-//        if let _ = self.command {
-//            calculate()
-//            self.command = command
-//            textValue = String()
-//            return
-//        }
-//        self.command = command
-//
-//        if let first = firstValue {
-//            secondValue = first
-//        } else {
-//            firstValue = Double(textValue)
-//        }
-//        textValue = String()
-    }
-    
-    private var expression = String()
-    
-    private func buildExpression() -> String {
-        return "HAHA"
     }
     
     func reset() {
-        firstValue = nil
-        secondValue = nil
-        command = nil
         textValue = String()
         delegate?.operationResult(0)
     }
@@ -144,27 +117,14 @@ class MathCalculator: Calculator {
     
     private func updateValue(_ value: String) {
         textValue.append(value)
-        
+        expression.append(value)
         guard let newValue = Double(textValue) else {
             print("Cant convert text value to Double")
             return
         }
-//
-//        if let _ = firstValue {
-//            secondValue = newValue
-//        }
         
         delegate?.currentValue(newValue)
-        
-        expression.append(value)
         delegate?.expression(expression)
-        
-//        delegate?.operationResult(newValue)
     }
     
-    private func update(with result: Double) {
-        firstValue = result
-        secondValue = nil
-        command = nil
-    }
 }
