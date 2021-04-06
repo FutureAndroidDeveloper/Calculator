@@ -81,6 +81,13 @@ class MathCalculator: Calculator {
     }
     
     func setCommand(_ command: MathCommand) {
+        if !operationStack.isEmpty {
+            // TODO: - после просчета все обнулится, но это неправильно
+            // после этого нужно обновить currentValue
+//            calculate()
+        }
+        
+        
         if let result = lastResult {
             expression.append("\(result)")
             textValue.append("\(result)")
